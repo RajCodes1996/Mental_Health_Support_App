@@ -1,0 +1,151 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>HELLO</pattern>
+        <template>Hello! How can I help you with your mental health today?</template>
+    </category>
+
+    <category>
+        <pattern>FEELING ANXIOUS</pattern>
+        <template>
+            I'm sorry to hear that. Try deep breathing exercises and talk to someone you trust. Would you like tips?
+        </template>
+    </category>
+
+    <category>
+        <pattern>YES</pattern>
+        <template>
+            1. Inhale through your nose for 4 seconds.
+            2. Hold your breath for 7 seconds.
+            3. Exhale slowly through your mouth for 8 seconds.
+            4. Repeat this cycle 4 to 5 times.
+        </template>
+    </category>
+
+    <category>
+        <pattern>I HAVE ANXIETY</pattern>
+        <template>
+            It's okay to feel that way. You're not alone. You can try journaling, mindfulness, or therapy.
+        </template>
+    </category>
+
+    <category>
+        <pattern>HI</pattern>
+        <template>Hello! I'm your mental health support bot. How are you feeling today?</template>
+    </category>
+
+    <category>
+        <pattern>FEELING SAD</pattern>
+        <template>Just take a deep breath and move on from the past... you will be fine!</template>
+    </category>
+
+    <category>
+        <pattern>OWNER OF THIS APP</pattern>
+        <template>The owner name is Priyal, she is an IT student and she is so damn beautiful❤️</template>
+    </category>
+
+    <category>
+        <pattern>STRESSED</pattern>
+        <template>
+            I understand that you're feeling stressed. Try to take breaks, stretch, or meditate. Would you like help with stress-relief exercises?
+        </template>
+    </category>
+
+    <category>
+        <pattern>STRESS RELIEF TIPS</pattern>
+        <template>
+            1. Take a few minutes to step away from your work.
+            2. Do some stretching exercises or a quick walk.
+            3. Practice mindfulness by focusing on your breath for 5 minutes.
+            4. Drink a glass of water to stay hydrated.
+        </template>
+    </category>
+
+    <category>
+        <pattern>FEELING DEPRESSED</pattern>
+        <template>
+            I'm really sorry you're feeling this way. It's important to talk to someone, whether it's a friend, family member, or therapist. Would you like resources for depression support?
+        </template>
+    </category>
+
+    <category>
+        <pattern>GIVE DEPRESSION SUPPORT TIPS</pattern>
+        <template>
+            Here are some resources you might find helpful:
+            1. Talk to a therapist or counselor.
+            2. Reach out to a trusted person in your life.
+            3. Join a support group or online community for mental health.
+            4. Engage in activities that make you happy or calm, like hobbies or mindfulness.
+        </template>
+    </category>
+
+    <category>
+        <pattern>FEELING LONELY</pattern>
+        <template>
+            Loneliness can be tough. It's important to remember that you're not alone. Sometimes talking to someone or getting involved in social activities can help. Would you like suggestions on connecting with others?
+        </template>
+    </category>
+
+    <category>
+        <pattern>GIVE CONNECTION TIPS</pattern>
+        <template>
+            Here are some ways to connect with others:
+            1. Try joining a club or group with a shared interest.
+            2. Volunteer for a cause you care about.
+            3. Reach out to a friend or family member you haven't spoken to in a while.
+            4. Use social media or online platforms to meet people with similar interests.
+        </template>
+    </category>
+
+    <category>
+        <pattern>FEELING OVERWHELMED</pattern>
+        <template>
+            It’s okay to feel overwhelmed sometimes. Break tasks into smaller, manageable steps, and take things one at a time. Would you like tips on managing overwhelming feelings?
+        </template>
+    </category>
+
+    <category>
+        <pattern>MANAGE THE FEELINGS</pattern>
+        <template>
+            1. Prioritize tasks and focus on one thing at a time.
+            2. Take regular breaks and give yourself time to recharge.
+            3. Set achievable goals for the day to avoid feeling overloaded.
+            4. Try journaling or talking to someone to release stress.
+        </template>
+    </category>
+
+    <category>
+        <pattern>SLEEPING PROBLEM</pattern>
+        <template>
+            Sleep is important for mental health. You can try relaxing techniques before bed, like reading or listening to calming music. Would you like tips on better sleep habits?
+        </template>
+    </category>
+
+    <category>
+        <pattern>GIVE SLEEPING TIPS</pattern>
+        <template>
+            1. Avoid screens (phone, computer, TV) for at least an hour before bed.
+            2. Establish a regular sleep routine.
+            3. Make your bedroom comfortable and calming.
+            4. Try relaxation exercises like deep breathing or progressive muscle relaxation.
+        </template>
+    </category>
+
+    <category>
+        <pattern>FEELING HOPELESS</pattern>
+        <template>
+            I'm really sorry that you're feeling hopeless. It's important to talk to someone and get support. Remember that feelings of hopelessness can pass with time and help. Would you like suggestions on how to move forward?
+        </template>
+    </category>
+
+    <category>
+        <pattern> WANTED TO MOVING FORWARD</pattern>
+        <template>
+            Here are some ways to move forward:
+            1. Seek professional help, such as therapy or counseling.
+            2. Talk to a friend or family member about how you're feeling.
+            3. Focus on small positive steps each day.
+            4. Engage in activities that bring you joy or comfort.
+        </template>
+    </category>
+
+</aiml>

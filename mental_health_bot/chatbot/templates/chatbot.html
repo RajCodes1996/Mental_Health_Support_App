@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mental Health Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            background: linear-gradient(-45deg, #a18cd1, #ebca10, #db0e3a, #ff9a9e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .chat-wrapper {
+            width: 420px;
+            height: 90vh;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-header {
+            background: black;
+            color: whitesmoke;
+            font-style: italic;
+            padding: 16px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: transparent;
+        }
+
+        .chat-box::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .message {
+            margin: 10px 0;
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+            font-size: 0.95rem;
+            animation: fadeIn 0.4s ease forwards;
+            opacity: 0;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: rgba(255, 255, 255, 0.7);
+            color: #333;
+            border-bottom-right-radius: 0;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background: rgb(44, 122, 109);
+            color: rgb(232, 245, 233);
+            border-bottom-left-radius: 0;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background: transparent;
+            color: #333;
+        }
+
+        input[type="text"]::placeholder {
+            color: #888;
+        }
+
+        button {
+            background: #6a11cb;
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            color: white;
+            border: none;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+        }
+
+        @keyframes fadeIn {
+            from {
+                transform: translateY(10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .typing {
+            font-style: italic;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-wrapper">
+        <div class="chat-header">🧠 Mental Health Assistant
+        <div><h6>Developed by @Rajarshi~Yadav</h6></div></div>
+
+        <!-- New Dropdown Filter -->
+        <select id="topic-filter"
+            style="margin: 10px; padding: 8px; font-size: 0.9rem; border-radius: 8px; outline: none; background:rgb(47, 0, 255); color:white">
+            <option value="">Choose a topic or type below 👇</option>
+            <option value="anxious">😰 Anxiety</option>
+            <option value="sad">😢 Sadness</option>
+            <option value="others">🌈 General Wellness</option>
+        </select>
+
+        <div class="chat-box" id="chat-box"></div>
+
+        <form class="chat-input-area" id="chat-form">
+            {% csrf_token %}
+            <input type="text" id="user-input" placeholder="Type how you're feeling..." autocomplete="off" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const chatForm = document.getElementById("chat-form");
+        const inputField = document.getElementById("user-input");
+        const topicFilter = document.getElementById("topic-filter");
+
+        function appendMessage(html, sender) {
+            const msg = document.createElement("div");
+            msg.classList.add("message", `${sender}-message`);
+            msg.innerHTML = html + `<div class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>`;
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const typing = document.createElement("div");
+            typing.classList.add("message", "bot-message", "typing");
+            typing.textContent = "Bot is typing...";
+            typing.setAttribute("id", "typing");
+            chatBox.appendChild(typing);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById("typing");
+            if (typing) typing.remove();
+        }
+
+        function sendMessage(message) {
+            appendMessage(message, "user");
+            inputField.value = "";
+            showTypingIndicator();
+
+            fetch("", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `message=${encodeURIComponent(message)}`
+            })
+                .then(res => res.json())
+                .then(data => {
+                    removeTypingIndicator();
+                    typeWriterEffect(data.response, "bot"); // 👈 Typewriter effect
+                });
+        }
+
+
+        chatForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const message = inputField.value.trim();
+            if (message === "") return;
+            sendMessage(message);
+        });
+
+        topicFilter.addEventListener("change", function () {
+            const message = this.value;
+            if (message) {
+                sendMessage(message);
+                topicFilter.selectedIndex = 0;
+            }
+        });
+
+        function typeWriterEffect(text, sender) {
+            const msg = document.createElement("div");
+            msg.classList.add("message", `${sender}-message`);
+            const time = `<div class="message-time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>`;
+            chatBox.appendChild(msg);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            let i = 0;
+            const typingSpeed = 20;
+
+            function type() {
+                if (i < text.length) {
+                    msg.innerHTML = text.substring(0, i + 1) + "|";  // simulate blinking cursor
+                    i++;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    msg.innerHTML = text + time;
+                }
+            }
+
+            type();
+        }
+    </script>
+</body>
+
+</html>

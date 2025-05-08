@@ -1,0 +1,35 @@
+<aiml version="1.0.1" encoding="UTF-8">
+ <category>
+        <pattern>HELLO</pattern>
+        <template>Hello! How can I help you with your mental health today?</template>
+    </category>
+
+  <category>
+    <pattern>FEELING ANXIOUS</pattern>
+    <template>
+      I'm sorry to hear that. Try deep breathing exercises and talk to someone you trust. Would you like some resources?
+    </template>
+  </category>
+
+  <category>
+    <pattern>I HAVE ANXIETY</pattern>
+    <template>
+      It's okay to feel that way. You're not alone. You can try journaling, mindfulness, or therapy. Would you like a breathing exercise link?
+    </template>
+  </category>
+
+  <category>
+    <pattern>HI</pattern>
+    <template>Hello! I'm your mental health support bot. How are you feeling today?</template>
+  </category>
+
+  <category>
+    <pattern>FEELING SAD</pattern>
+    <template>Just take a deep breathe! and move on from the past... you will be fine!</template>
+  </category>
+
+   <category>
+    <pattern>OWNER OF THIS APP</pattern>
+    <template>The owner name is Priyal, she is an IT student and she is so damn beautiful❤️</template>
+  </category>
+</aiml>
